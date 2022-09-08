@@ -1,8 +1,6 @@
 package JavaCollectionAssignment;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
+import java.util.*;
 
 import static JavaCollectionAssignment.Employe.arrayList;
 import static JavaCollectionAssignment.Employe.getEmployeeDetails;
@@ -127,6 +125,51 @@ class EmployeeDB{
 
 
 }
+class Test2TreeSet {
+    static Set<Employe> empTreeSet = new TreeSet<Employe>();
+
+    public boolean addEmployee(Employe e) {
+        return empTreeSet.add(e);
+    }
+
+    public boolean deleteEmployee(Integer empId) {
+        Iterator<Employe> it = empTreeSet.iterator();
+
+        while (it.hasNext()) {
+            Employe e = it.next();
+            if (e.getEmpId() == empId) {
+                return empTreeSet.remove(e);
+            }
+        }
+        return false;
+    }
+
+    public String showPaySlip(Integer empId) {
+        Iterator<Employe> it = empTreeSet.iterator();
+        String paySlip;
+        while (it.hasNext()) {
+            Employe e = it.next();
+            if (e.getEmpId() == empId) {
+                paySlip = "Name: " + e.getEmpName() + "\nEmail: " + e.getEmpEmail() + "\nGender: " + e.getEmpGender()
+                        + "\nSalary: " + e.getEmpSalary();
+                return paySlip;
+            }
+        }
+        return null;
+    }
+
+    Employee[] listAll() {
+        int index = 0;
+        Employee[] emp = new Employee[empTreeSet.size()];
+        Iterator it = empTreeSet.iterator();
+        while (it.hasNext()) {
+            Employee e = (Employee) it.next();
+            emp[index++] = e;
+        }
+        return emp;
+    }
+}
+
 public class Test2 {
     public static void main(String[] args) {
         EmployeeDB objDB = new EmployeeDB();
